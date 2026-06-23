@@ -191,6 +191,10 @@ app.delete('/api/reservas/:id', async (req, res) => {
   res.json({ success: true, id });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor listo en http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Servidor listo en http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
