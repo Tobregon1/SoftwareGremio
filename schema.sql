@@ -26,3 +26,8 @@ CREATE TABLE IF NOT EXISTS reservas (
   fecha_fin TEXT,
   estado TEXT DEFAULT 'Activa'
 );
+
+-- ⚠️ Desactivar RLS para permitir acceso con anon key (app interna)
+ALTER TABLE afiliados   DISABLE ROW LEVEL SECURITY;
+ALTER TABLE habitaciones DISABLE ROW LEVEL SECURITY;
+ALTER TABLE reservas    DISABLE ROW LEVEL SECURITY;
