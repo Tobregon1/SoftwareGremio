@@ -11,13 +11,27 @@ app.use(express.json());
 app.use(express.static(__dirname));
 
 // ── Cliente Supabase ──────────────────────────────────────────────────────────
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_KEY
-);
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
+
+let supabase = null;
+if (supabaseUrl && supabaseKey) {
+  supabase = createClient(supabaseUrl, supabaseKey);
+} else {
+  console.error('❌ Faltan las variables de entorno SUPABASE_URL o SUPABASE_KEY.');
+}
+
+// Middleware para verificar base de datos
+app.use('/api', (req, res, next) => {
+  if (!supabase) {
+    return res.status(500).json({ error: 'La base de datos no está configurada (Faltan variables SUPABASE en Vercel).' });
+  }
+  next();
+});
 
 // ── Sembrar habitaciones por defecto si la tabla está vacía ──────────────────
 async function initDB() {
+  if (!supabase) return;
   try {
     const { count, error } = await supabase
       .from('habitaciones')

@@ -594,14 +594,14 @@
         <form id="form-reserva" onsubmit="crearReserva(event)">
             <div class="form-group" style="text-align: left;">
                 <label>Afiliado Titular</label>
-                <select id="reserva-afiliado" required>
+                <select id="reserva-afiliado" class="form-select" style="color: black; background: white;" required>
                     <option value="">Seleccione un afiliado...</option>
                 </select>
             </div>
             
             <div class="form-group" style="text-align: left;">
                 <label>Habitación</label>
-                <select id="reserva-habitacion" required>
+                <select id="reserva-habitacion" class="form-select" style="color: black; background: white;" required>
                     <option value="">Seleccione habitación disponible...</option>
                 </select>
             </div>
@@ -609,11 +609,11 @@
             <div style="display:flex; gap:10px;">
                 <div class="form-group" style="text-align: left; flex:1;">
                     <label>Fecha de Ingreso</label>
-                    <input type="date" id="reserva-inicio" required>
+                    <input type="date" id="reserva-inicio" class="form-input" style="color: black; background: white;" required>
                 </div>
                 <div class="form-group" style="text-align: left; flex:1;">
                     <label>Fecha de Egreso</label>
-                    <input type="date" id="reserva-fin" required>
+                    <input type="date" id="reserva-fin" class="form-input" style="color: black; background: white;" required>
                 </div>
             </div>
 
@@ -935,8 +935,9 @@
                 <td>${badge}</td>
                 <td style="text-align:right">
                     ${r.estado === 'Activa' ? 
-                        `<button class="btn-icon" data-action="eliminar-reserva" data-id="${r.id}" data-nombre="Reserva #${r.id} (${r.afiliado_nombre})" title="Finalizar/Cancelar Reserva">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                        `<button class="btn-del" data-action="eliminar-reserva" data-id="${r.id}" data-nombre="Reserva #${r.id} (${r.afiliado_nombre})" title="Finalizar/Cancelar Reserva">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                            Cancelar
                         </button>` : ''
                     }
                 </td>
